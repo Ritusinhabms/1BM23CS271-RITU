@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define size 3
+int Q[size];
+int rear=-1;
+int front=-1;
+void delete1();
+void insert1();
+void display1();
+int main()
+{
+    int choice;
+    while(1)
+        {
+            printf("1.insertion\n");
+            printf("2.deletion\n");
+            printf("3.Display\n");
+            printf("4.Exit\n");
+            printf("enter your choice\n");
+            scanf("%d",&choice);
+            switch(choice)
+            {
+                case 1:insert1();
+                break;
+                case 2:delete1();
+                break;
+                case 3:display1();
+                break;
+                case 4:exit(1);
+                default:
+                    printf("Invalid input\n");
+            }
+        }
+        return 0;
+}
+void insert1()
+{
+    int item;
+    if(rear==(size-1))
+    {
+        printf("Queue Overflow\n");
+    }
+    else
+    {
+        if(front ==-1)
+        front=0;
+        printf("Enter the element to be inserted\n");
+        scanf("%d",&item);
+        rear=rear+1;
+        Q[rear]=item;
+    }
+}
+void delete1()
+{
+    if(front==-1||front>rear)
+    {
+        printf("Queue underflow\n");
+        return;
+    }
+    else
+    {
+        printf("Deleted element is:%d\n",Q[front]);
+        front=front+1;
+    }
+}
+void display1()
+{
+    int i;
+    if(front==-1)
+    {
+
+        printf("Queue is Empty\n");
+    }
+    else
+    {
+        printf("Queue elements:\n");
+        for(i=front;i<=rear;i++)
+        {
+            printf("%d\n",Q[i]);
+        }
+    }
+}
