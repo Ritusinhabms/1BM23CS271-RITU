@@ -1,0 +1,23 @@
+int two_stacks(int maxsum, int a_count, int *a, int b_count, int *b) {
+    int sum = 0;
+    int Score = 0;
+    int i = 0;
+    int j = 0;
+
+    while (i < a_count && j < b_count) {
+        if (a[i] <= b[j] && (sum + a[i] <= maxsum)) {
+            sum += a[i];
+            Score++;
+            i++;
+            if (sum == maxsum) break;
+        } else if (a[i] > b[j] && (sum + b[j] <= maxsum)) {
+            sum += b[j];
+            Score++;
+            j++;
+            if (sum == maxsum) break;
+        } else {
+            break;
+        }
+    }
+    return Score;
+}
