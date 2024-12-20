@@ -1,0 +1,127 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ struct node
+ {
+ int data;
+ struct node *next;
+ };
+ struct node* head=NULL;
+ struct node* ptr=NULL;
+ int top1=-1;
+ struct node* createnode(int value)
+ {
+ struct node* newnode=(struct node*)malloc(sizeof(struct node));
+ newnode->data=value;
+ newnode->next=NULL;
+ }
+ void printstack()
+ {
+ ptr=head;
+ while(ptr->next!=NULL)
+ {
+ printf("%d->",ptr->data);
+ ptr=ptr->next;
+ }
+ printf("%d\nEND OF STACK\n",ptr->data);
+ }
+ void push(int value)
+ {
+ if (top1==4)
+ {
+ printf("Stack is full, element not pushed\n");
+ }
+ else
+ {
+ struct node* newnode = createnode(value);
+ if (head==NULL)
+ {
+ head=newnode;
+ ptr=newnode;
+ }
+ else
+ {
+ 
+ptr->next=newnode;
+ ptr=newnode;
+ }
+ printf("Element pushed is %d\n",ptr->data);
+ top1++;
+ }
+ }
+ void pop()
+ {
+ if (head == NULL)
+ {
+ printf("Stack is empty, nothing to delete\n");
+ }
+ else if (head->next == NULL)
+ {
+ printf("Element deleted is %d\n", head->data);
+ free(head);
+ head = NULL;
+ ptr = NULL;
+ top1--;
+ }
+ else
+ {
+ struct node* deleteptr;
+ struct node* preptr = head;
+ while (preptr->next->next != NULL)
+ {
+ preptr = preptr->next;
+ }
+ deleteptr = preptr->next;
+ preptr->next = NULL;
+ ptr = preptr;
+ printf("Element deleted is %d\n", deleteptr->data);
+ free(deleteptr);
+ top1--;
+ }
+ }
+ void peek()
+ {
+ if (ptr==NULL)
+ {
+ printf("Stack is empty dawg\n");
+ }
+ else
+
+{
+ printf("%d\n",ptr->data);
+ }
+ }
+ void main()
+ {
+ int n,pushedValue;
+ for(int i=0;i<=10000;i++)
+ {
+ printf("Enter \n1 to push\n2 to pop\n3 to display\n4 to peek\n5 to exit");
+ scanf("%d",&n);
+ if (n==1)
+ {
+ printf("Enter value to be pushed");
+ scanf("%d",&pushedValue);
+ push(pushedValue);
+ }
+ else if (n==2)
+ {
+ pop();
+ }
+ else if(n==3)
+ {
+ printstack();
+ }
+ else if (n==4)
+ {
+ peek();
+ }
+ else if(n==5)
+ {
+ exit(0);
+ }
+ else
+ {
+ printf("Invalid input");
+ }
+ }
+ }
